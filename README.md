@@ -90,7 +90,7 @@ Cloud assets utils by PingCAP FE.
   cloud_assets_utils.exe SUBCOMMAND
 
 https://github.com/pingcap/cloud-assets-utils
-version:0.2.0 (2020-02-15)
+version:0.2.1 (2020-02-15)
 
 === subcommands ===
 

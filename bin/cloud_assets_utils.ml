@@ -1,6 +1,6 @@
 open Core
 
-let version = "version:0.2.0 (2020-02-15)"
+let version = "version:0.2.1 (2020-02-15)"
 let build_info = "Cloud assets utils by PingCAP FE."
 let repo_url = "https://github.com/pingcap/cloud-assets-utils"
 
