@@ -13,7 +13,7 @@ jobs:
           name: Install packages
           command: |
             apt update
-            apt install python3-pip m4 -y 
+            apt install curl unzip git python3-pip m4 -y 
 
       - restore_cache:
           keys:
