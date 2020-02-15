@@ -1,0 +1,4 @@
+(executable
+  (name cloud_assets_utils)
+  (libraries core lib)
+  (preprocess (pps ppx_jane)))
