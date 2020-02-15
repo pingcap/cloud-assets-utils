@@ -13,7 +13,7 @@ jobs:
           name: Install packages
           command: |
             apt update
-            apt install curl unzip git python3-pip m4 -y 
+            apt install curl unzip git python3-pip m4 -y
 
       - restore_cache:
           keys:
@@ -23,8 +23,8 @@ jobs:
           name: Initialize opam
           command: |
             echo | sh <(curl -sL https://raw.githubusercontent.com/ocaml/opam/master/shell/install.sh)
-            opam switch create 4.07.1 -y
-            opam install -y dune core
+            opam init -c 4.07.1 --disable-sandboxing -y && opam switch 4.07.1 -y
+            opam install dune core -y
 
       - save_cache:
           key: opam-cache-{{ checksum "dune-project" }}
