@@ -4,17 +4,13 @@ Cloud assets utils by PingCAP FE.
 
 ## How to use
 
-### Install qshell
+### Install and configure qshell
 
 <https://github.com/qiniu/qshell>
 
 The version we used is:
 
 > qshell version v2.4.1
-
-#### Configure qshell
-
-Type `qshell account`:
 
 ```sh
 qshell account AccessKey SecretKey Name
@@ -27,7 +23,7 @@ qshell account
 qshell buckets # list all buckets
 ```
 
-### Install awscli
+### Install and configure awscli
 
 ```sh
 pip install awscli
@@ -36,8 +32,6 @@ pip install awscli
 The version we used is:
 
 > aws-cli/1.17.16 Python/3.7.6 Darwin/19.3.0 botocore/1.14.16
-
-#### configure awscli
 
 ```sh
 aws configure
@@ -51,13 +45,11 @@ aws configure list
 
 ### Install cloud_assets_utils
 
-#### Build from source
-
-##### Install ocaml and opam
+Install ocaml and opam:
 
 <http://ocaml.org/docs/install.html>
 
-##### Install dependencies
+Install dependencies:
 
 ```sh
 opam install dune core
@@ -66,7 +58,7 @@ opam install dune core
 opam install merlin ocp-indent utop
 ```
     
-##### Build by dune
+Build by dune:
 
 Into the repo, run:
 
