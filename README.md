@@ -173,3 +173,7 @@ The `-replace-first-path-to` replace the files' first path, for example:
 `cloud_assets_utils verify-and-sync media -replace-first-path-to pingcap/test`
 
 will replace `media/a.png` to `pingcap/test/a.png`.
+
+## License
+
+Under Apache-2.0.
