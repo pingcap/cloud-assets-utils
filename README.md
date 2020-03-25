@@ -2,6 +2,9 @@
 
 Cloud assets utils by PingCAP FE.
 
+![Upload some files to Qiniu and Aws when they change](https://github.com/pingcap/cloud-assets-utils/workflows/Upload%20some%20files%20to%20Qiniu%20and%20Aws%20when%20they%20change/badge.svg)
+[![CircleCI](https://circleci.com/gh/pingcap/cloud-assets-utils.svg?style=svg)](https://circleci.com/gh/pingcap/cloud-assets-utils)
+
 * [How to use](#how-to-use)
   + [Use in CI](#use-in-ci)
   + [Install and configure qshell](#install-and-configure-qshell)
