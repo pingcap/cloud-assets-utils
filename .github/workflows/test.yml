@@ -37,6 +37,7 @@ jobs:
 
       - name: configure awscli
         run: |
+          pip3 install --upgrade setuptools
           pip3 install awscli
           printf "%s\n" ${{ secrets.AWS_ACCESS_KEY }} ${{ secrets.AWS_SECRET_KEY }} ${{ secrets.AWS_REGION }} "json" | aws configure
 
@@ -45,3 +46,12 @@ jobs:
           cloud_assets_utils verify-and-sync -qiniu true -qiniu-bucket ${{ secrets.QINIU_BUCKET_NAME }} -aws true -aws-bucket ${{ secrets.AWS_BUCKET_NAME }} .github
           cloud_assets_utils verify-and-sync -qiniu true -qiniu-bucket ${{ secrets.QINIU_BUCKET_NAME }} -aws true -aws-bucket ${{ secrets.AWS_BUCKET_NAME }} bin
           cloud_assets_utils verify-and-sync -qiniu true -qiniu-bucket ${{ secrets.QINIU_BUCKET_NAME }} -aws true -aws-bucket ${{ secrets.AWS_BUCKET_NAME }} lib
+
+      - name: Upload cloud_assets_utils to release
+        uses: svenstaro/upload-release-action@v1-release
+        with:
+          repo_token: ${{ secrets.GH_TOKEN }}
+          file: _build/default/bin/cloud_assets_utils.exe
+          asset_name: cloud_assets_utils
+          tag: ${{ github.ref }}
+          overwrite: true
