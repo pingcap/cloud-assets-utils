@@ -18,6 +18,9 @@ jobs:
           - 4.07.1
     steps:
       - uses: actions/checkout@master
+        with:
+          # Must use at least depth 2!
+          fetch-depth: 2
       - uses: avsm/setup-ocaml@master
         with:
           ocaml-version: ${{ matrix.ocaml-version }}
