@@ -52,6 +52,6 @@ jobs:
         with:
           repo_token: ${{ secrets.GH_TOKEN }}
           file: _build/default/bin/cloud_assets_utils.exe
-          asset_name: cloud_assets_utils
-          tag: ${{ github.ref }}
+          asset_name: cloud_assets_utils-ubuntu-latest
+          tag: v0.2.0
           overwrite: true

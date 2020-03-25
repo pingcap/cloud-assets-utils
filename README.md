@@ -2,6 +2,15 @@
 
 Cloud assets utils by PingCAP FE.
 
+* [How to use](#how-to-use)
+  + [Install and configure qshell](#install-and-configure-qshell)
+  + [Install and configure awscli](#install-and-configure-awscli)
+  + [Install cloud_assets_utils](#install-cloud_assets_utils)
+* [Use it](#use-it)
+* [All subcommands](#all-subcommands)
+* [Verify And Sync](#verify-and-sync)
+* [License](#license)
+
 ## How to use
 
 ### Install and configure qshell
