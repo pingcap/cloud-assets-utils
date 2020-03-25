@@ -3,6 +3,7 @@
 Cloud assets utils by PingCAP FE.
 
 * [How to use](#how-to-use)
+  + [Use in CI](#use-in-ci)
   + [Install and configure qshell](#install-and-configure-qshell)
   + [Install and configure awscli](#install-and-configure-awscli)
   + [Install cloud_assets_utils](#install-cloud_assets_utils)
@@ -12,6 +13,14 @@ Cloud assets utils by PingCAP FE.
 * [License](#license)
 
 ## How to use
+
+### Use in CI
+
+This tool is usually used on CI. You can find binaries in [Release](https://github.com/pingcap/cloud-assets-utils/releases). Download and use it.
+
+Also, we test it in circleci and GitHub actions. View **[.circleci/config.yml](https://github.com/pingcap/cloud-assets-utils/blob/master/.circleci/config.yml)** and **[.github/workflows/test.yml](https://github.com/pingcap/cloud-assets-utils/blob/master/.github/workflows/test.yml)** for more details.
+
+If you want to use it in a local machine. Please read below carefully.
 
 ### Install and configure qshell
 
