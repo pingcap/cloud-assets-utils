@@ -24,6 +24,7 @@ jobs:
 
       - name: Build
         run: |
+          opam install dune core -y
           opam exec -- dune build
           cp ./_build/default/bin/cloud_assets_utils.exe /usr/local/bin/cloud_assets_utils
 
