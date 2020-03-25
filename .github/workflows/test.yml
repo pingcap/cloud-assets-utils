@@ -26,13 +26,13 @@ jobs:
         run: |
           opam install dune core -y
           opam exec -- dune build
-          cp ./_build/default/bin/cloud_assets_utils.exe /usr/local/bin/cloud_assets_utils
+          sudo cp ./_build/default/bin/cloud_assets_utils.exe /usr/local/bin/cloud_assets_utils
 
       - name: Configure qshell
         run: |
           curl http://devtools.qiniu.com/qshell-linux-x64-v2.4.1.zip -o qshell.zip
           unzip qshell.zip
-          mv qshell-linux-x64-v2.4.1 /usr/local/bin/qshell
+          sudo mv qshell-linux-x64-v2.4.1 /usr/local/bin/qshell
           qshell account ${{ secrets.QINIU_ACCESS_KEY }} ${{ secrets.QINIU_SECRET_KEY }} test
 
       - name: configure awscli
