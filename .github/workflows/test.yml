@@ -47,9 +47,9 @@ jobs:
       - name: Upload
         run: |
           cloud_assets_utils verify .
-          cloud_assets_utils verify-and-sync -qiniu true -qiniu-bucket ${{ secrets.QINIU_BUCKET_NAME }} -aws true -aws-bucket ${{ secrets.AWS_BUCKET_NAME }} .github
-          cloud_assets_utils verify-and-sync -qiniu true -qiniu-bucket ${{ secrets.QINIU_BUCKET_NAME }} -aws true -aws-bucket ${{ secrets.AWS_BUCKET_NAME }} bin
-          cloud_assets_utils verify-and-sync -qiniu true -qiniu-bucket ${{ secrets.QINIU_BUCKET_NAME }} -aws true -aws-bucket ${{ secrets.AWS_BUCKET_NAME }} lib
+          cloud_assets_utils verify-and-sync -qiniu true -qiniu-bucket ${{ secrets.QINIU_BUCKET_NAME }} -aws true -aws-bucket ${{ secrets.AWS_BUCKET_NAME }} .github -replace-first-path-to cloud-assets-utils/.github
+          cloud_assets_utils verify-and-sync -qiniu true -qiniu-bucket ${{ secrets.QINIU_BUCKET_NAME }} -aws true -aws-bucket ${{ secrets.AWS_BUCKET_NAME }} bin -replace-first-path-to cloud-assets-utils/bin
+          cloud_assets_utils verify-and-sync -qiniu true -qiniu-bucket ${{ secrets.QINIU_BUCKET_NAME }} -aws true -aws-bucket ${{ secrets.AWS_BUCKET_NAME }} lib -replace-first-path-to cloud-assets-utils/lib
 
       - name: Upload cloud_assets_utils to release
         uses: svenstaro/upload-release-action@v1-release
