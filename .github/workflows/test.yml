@@ -17,11 +17,11 @@ jobs:
         ocaml-version:
           - 4.07.1
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v2
         with:
           # Must use at least depth 2!
           fetch-depth: 2
-      - uses: avsm/setup-ocaml@master
+      - uses: avsm/setup-ocaml@v1
         with:
           ocaml-version: ${{ matrix.ocaml-version }}
 
@@ -52,7 +52,7 @@ jobs:
           cloud_assets_utils verify-and-sync -qiniu true -qiniu-bucket ${{ secrets.QINIU_BUCKET_NAME }} -aws true -aws-bucket ${{ secrets.AWS_BUCKET_NAME }} lib -replace-first-path-to cloud-assets-utils/lib
 
       - name: Upload cloud_assets_utils to release
-        uses: svenstaro/upload-release-action@v1-release
+        uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GH_TOKEN }}
           file: _build/default/bin/cloud_assets_utils.exe
