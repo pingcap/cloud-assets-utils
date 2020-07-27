@@ -13,18 +13,10 @@
  * limitations under the License. *)
 
 open Core
-open Stdio
 
 let delete =
-  Command.basic
-    ~summary:"Delete module of qiniu"
+  Command.basic ~summary:"Qshell Delete"
     Command.Let_syntax.(
-      let%map_open
-        bucket = flag "bucket" (required string)
-          ~doc:"Specify a bucket name"
-      and filename = anon (maybe ("filename" %: string))
-      in
-      fun () -> match filename with
-        | None -> print_endline "Must provide a filename to delete"
-        | Some filename -> Lib.Qshell.delete ~bucket:bucket ~key:filename
-    )
+      let%map_open bucket = flag "bucket" (required string) ~doc:"Specify the bucket name"
+      and filename = anon ("filename" %: string) in
+      fun () -> Lib.Qshell.delete ~bucket ~key:filename)

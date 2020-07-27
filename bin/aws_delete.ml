@@ -13,23 +13,23 @@
  * limitations under the License. *)
 
 open Core
-open Stdio
 
 let delete =
-  Command.basic
-    ~summary:"Delete module of aws"
+  Command.basic ~summary:"AWS CLI S3 Delete"
     Command.Let_syntax.(
-      let%map_open
-        bucket = flag "bucket" (required string)
-          ~doc:"Specify a bucket name"
-      and filename = anon (maybe ("filename" %: string))
-      and recursive = flag "recursive" (optional_with_default false bool)
-          ~doc:"Delete recursively"
-      and incl = flag "include" (optional string)
-          ~doc:"Include files"
-      and excl = flag "exclude" (optional string)
-          ~doc:"Exclude files"
-      in
-      fun () -> match filename with
-        | None -> print_endline "Must provide a filename to delete"
-        | Some filename -> Lib.Aws.rm ~bucket:bucket ~key:filename ~recursive:recursive ~incl:incl ~excl:excl)
+      let%map_open bucket = flag "bucket" (required string) ~doc:"Specify the bucket name"
+      and dryrun =
+        flag "dryrun" (optional_with_default false bool)
+          ~doc:
+            "Displays the operations that would be performed using the specified command without actually running them"
+      and recursive =
+        flag "recursive" (optional_with_default false bool)
+          ~doc:"Command is performed on all files or objects under the specified directory or prefix"
+      and incl =
+        flag "include" (optional string)
+          ~doc:"Don't exclude files or objects in the command that match the specified pattern"
+      and excl =
+        flag "exclude" (optional string)
+          ~doc:"Exclude all files or objects from the command that matches the specified pattern"
+      and filename = anon ("filename" %: string) in
+      fun () -> Lib.Aws.rm ~bucket ~dryrun ~recursive ~incl ~excl filename)

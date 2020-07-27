@@ -12,14 +12,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. *)
 
+val version : unit -> unit
 (** Print awscli version *)
-val version: unit -> unit
 
+val buckets : unit -> unit
 (** Get all buckets of the aws account *)
-val buckets: unit -> unit
 
-val cp: 
-  bucket:string -> ?key:string -> file:string -> incl:string option -> excl:string option -> unit
+val cp : bucket:string -> ?key:string -> ?dryrun:bool -> incl:string option -> excl:string option -> string -> unit
 
-val rm:
-  bucket:string -> key:string -> recursive:bool -> incl:string option -> excl:string option -> unit
+val rm : bucket:string -> ?dryrun:bool -> recursive:bool -> incl:string option -> excl:string option -> string -> unit

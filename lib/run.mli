@@ -14,8 +14,8 @@
 
 type t = string
 
+val exec : t -> t list
 (** Exec command and collect its output, return a string list *)
-val exec: t -> t list
 
-(** [exec] and print *)
-val run: t -> unit
+val run : t -> unit
+(** [exec] and print to stdout *)

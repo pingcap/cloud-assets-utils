@@ -17,42 +17,29 @@ open Stdio
 
 type t = string
 
-type git_changed_file_with_status = {
-  status: t;
-  file: t;
-}
+type git_changed_file_with_status = { status : t; file : t }
 
 let rec print_git_changed_files_list list =
   match list with
   | [] -> ()
-  | hd :: tl -> (
+  | hd :: tl ->
       print_endline hd.file;
-      print_git_changed_files_list tl;
-    )
+      print_git_changed_files_list tl
 
 let dir_files dir =
   let rec loop result = function
-    | f::fs when Caml.Sys.is_directory f ->
-      Caml.Sys.readdir f
-      |> Array.to_list
-      |> List.map ~f:(Caml.Filename.concat f)
-      |> List.append fs
-      |> loop result
-    | f::fs -> loop (f::result) fs
+    | f :: fs when Caml.Sys.is_directory f ->
+        Caml.Sys.readdir f |> Array.to_list |> List.map ~f:(Caml.Filename.concat f) |> List.append fs |> loop result
+    | f :: fs -> loop (f :: result) fs
     | [] -> result
   in
-  loop [] [dir]
+  loop [] [ dir ]
 
 let remove_file_first_path file =
-  let last_path = file
-                  |> String.split ~on:'/'
-                  |> List.tl in
-  match last_path with
-  | None | Some([]) | Some([""]) -> ""
-  | Some(last_path) -> String.concat ~sep:"/" last_path
+  let last_path = file |> String.split ~on:'/' |> List.tl in
+  match last_path with None | Some [] | Some [ "" ] -> "" | Some last_path -> String.concat ~sep:"/" last_path
 
-let replace_file_first_path file new_first_path =
-  new_first_path ^ "/" ^ (remove_file_first_path file)
+let replace_file_first_path file new_first_path = new_first_path ^ "/" ^ remove_file_first_path file
 
 let git_changed_files_from_HEAD dir =
   Run.exec ("git config core.quotePath false && git --no-pager show --pretty=\"\" --name-status " ^ dir)
@@ -61,12 +48,11 @@ let git_changed_files_from_HEAD_with_status dir =
   let re = Str.regexp "\\([A-Z0-9]+\\)\t\\(.+\\)" in
   let files = git_changed_files_from_HEAD dir in
   List.map
-    ~f:(fun file ->
-        let _ = Str.string_match re file 0 in
-        let status = Str.matched_group 1 file in
-        let file' = Str.matched_group 2 file in
-        { status; file = file' }
-      )
+    ~f:(fun f ->
+      let _ = Str.string_match re f 0 in
+      let status = Str.matched_group 1 f in
+      let file = Str.matched_group 2 f in
+      { status; file })
     files
 
 let write_lines filename string_list = Out_channel.write_lines filename string_list

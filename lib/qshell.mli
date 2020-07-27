@@ -12,21 +12,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. *)
 
+val version : unit -> unit
 (** Print qshell version *)
-val version: unit -> unit
 
+val buckets : unit -> unit
 (** Get all buckets of the qiniu account *)
-val buckets: unit -> unit
 
-val common_put: string -> string -> string -> string -> bool -> unit
+val common_put : string -> string -> string -> string -> bool -> unit
 
-val fput: string -> string -> string -> bool -> unit
+val fput : string -> string -> string -> bool -> unit
 
-val rput: string -> string -> string -> bool -> unit
+val rput : string -> string -> string -> bool -> unit
 
-val put:
-  bucket:string -> key:string -> file:string -> overwrite:bool -> unit
+val put : bucket:string -> key:string -> file:string -> overwrite:bool -> unit
 
-val delete: bucket:string -> key:string -> unit
+val delete : bucket:string -> key:string -> unit
 
-val cdn_refresh: string -> unit
+val cdn_refresh : string -> unit
