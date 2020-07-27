@@ -37,7 +37,7 @@ let process_upload bucket filename overwrite replace_first_path_to =
 let upload =
   Command.basic ~summary:"Qshell Upload"
     Command.Let_syntax.(
-      let%map_open bucket = flag "bucket" (required string) ~doc:"Specify a bucket name"
+      let%map_open bucket = flag "bucket" (required string) ~doc:"Specify the bucket name"
       and overwrite = flag "overwrite" (optional_with_default false bool) ~doc:"Overwrite exist file or not"
       and replace_first_path_to = flag "replace-first-path-to" (optional string) ~doc:"Replace first path to"
       and filename = anon ("filename" %: string) in

@@ -5,15 +5,15 @@ Cloud assets utils by PingCAP FE.
 ![Upload some files to Qiniu and Aws when they change](https://github.com/pingcap/cloud-assets-utils/workflows/Upload%20some%20files%20to%20Qiniu%20and%20Aws%20when%20they%20change/badge.svg)
 [![CircleCI](https://circleci.com/gh/pingcap/cloud-assets-utils.svg?style=svg)](https://circleci.com/gh/pingcap/cloud-assets-utils)
 
-* [How to use](#how-to-use)
-  + [Use in CI](#use-in-ci)
-  + [Install and configure qshell](#install-and-configure-qshell)
-  + [Install and configure awscli](#install-and-configure-awscli)
-  + [Install cloud_assets_utils](#install-cloud_assets_utils)
-* [Use it](#use-it)
-* [All subcommands](#all-subcommands)
-* [Verify And Sync](#verify-and-sync)
-* [License](#license)
+- [How to use](#how-to-use)
+  - [Use in CI](#use-in-ci)
+  - [Install and configure qshell](#install-and-configure-qshell)
+  - [Install and configure awscli](#install-and-configure-awscli)
+  - [Install cloud_assets_utils](#install-cloud_assets_utils)
+- [Use it](#use-it)
+- [All subcommands](#all-subcommands)
+- [Verify And Sync](#verify-and-sync)
+- [License](#license)
 
 ## How to use
 
@@ -27,11 +27,7 @@ If you want to use it in a local machine. Please read below carefully.
 
 ### Install and configure qshell
 
-<https://github.com/qiniu/qshell>
-
-The version we used is:
-
-> qshell version v2.4.1
+The [qshell](https://github.com/qiniu/qshell) we used is `v2.4.2`:
 
 ```sh
 qshell account AccessKey SecretKey Name
@@ -50,9 +46,7 @@ qshell buckets # list all buckets
 pip install awscli
 ```
 
-The version we used is:
-
-> aws-cli/1.17.16 Python/3.7.6 Darwin/19.3.0 botocore/1.14.16
+The version we used is `aws-cli/1.18.105 Python/3.7.6 Darwin/19.6.0 botocore/1.17.28`:
 
 ```sh
 aws configure
@@ -66,7 +60,7 @@ aws configure list
 
 ### Install cloud_assets_utils
 
-Install ocaml and opam:
+Install OCaml and Opam:
 
 <http://ocaml.org/docs/install.html>
 
@@ -76,12 +70,10 @@ Install dependencies:
 opam install dune core
 
 # For development (Optional)
-opam install merlin ocp-indent utop
+opam install merlin ocp-indent utop ocamlformat
 ```
-    
-Build by dune:
 
-Into the repo, run:
+Build by dune:
 
 ```sh
 dune build
@@ -91,6 +83,12 @@ The output file can be executed by:
 
 ```sh
 ./_build/default/bin/cloud_assets_utils.exe help
+```
+
+Or merge two commands to one:
+
+```sh
+dune exec -- bin/cloud_assets_utils.exe help
 ```
 
 ## Use it
@@ -103,20 +101,20 @@ Cloud assets utils by PingCAP FE.
   cloud_assets_utils.exe SUBCOMMAND
 
 https://github.com/pingcap/cloud-assets-utils
-version:0.2.1 (2020-02-15)
+version:0.2.2 (2020-07-27)
 
 === subcommands ===
 
-  aws-buckets      Run aws buckets
-  aws-delete       Delete module of aws
-  aws-upload       Upload module of aws
+  aws-buckets      Run aws s3 ls
+  aws-delete       AWS CLI S3 Delete
+  aws-upload       AWS CLI S3 Upload
   aws-version      Run aws --version
   qshell-buckets   Run qshell buckets
-  qshell-delete    Delete module of qiniu
-  qshell-upload    Upload module of qiniu
+  qshell-delete    Qshell Delete
+  qshell-upload    Qshell Upload
   qshell-version   Run qshell --version
-  verify           Verify changed files
-  verify-and-sync  Verify changed files and sync to oss
+  verify           Verify changed files from HEAD
+  verify-and-sync  Verify changed files from HEAD and sync to oss
   version          print version information
   help             explain a given subcommand (perhaps recursively)
 ```
@@ -126,13 +124,13 @@ You can use the commands according to your needs.
 For example, type `cloud_assets_utils qshell-upload -h`:
 
 ```sh
-Upload module of qiniu
+Qshell Upload
 
-  cloud_assets_utils.exe qshell-upload [FILENAME]
+  cloud_assets_utils.exe qshell-upload FILENAME
 
 === flags ===
 
-  -bucket Specify                   a bucket name
+  -bucket Specify                   the bucket name
   [-overwrite Overwrite]            exist file or not
   [-replace-first-path-to Replace]  first path to
   [-help]                           print this help text and exit
@@ -152,7 +150,7 @@ Upload module of qiniu
 | qshell-upload   | Upload a file or all files in a folder                  |
 | qshell-version  | Same as `qshell -v`                                     |
 | verify          | Same as `git --no-pager show --pretty="" --name-status` |
-| verify-and-sync | `verify` and sync to oss (qiniu, aws)                   |
+| verify-and-sync | `verify` and sync to oss (qiniu, aws s3)                |
 
 ## Verify And Sync
 
@@ -161,17 +159,17 @@ This subcommand verify the last git commit files in a specific folder and sync t
 Including add, modify and delete.
 
 ```sh
-Verify changed files and sync to oss
+Verify changed files from HEAD and sync to oss
 
-  cloud_assets_utils.exe verify-and-sync [DIR]
+  cloud_assets_utils.exe verify-and-sync DIR
 
 === flags ===
 
   [-aws Sync]                       files to aws
-  [-aws-bucket Aws]                 bucket
+  [-aws-bucket Specify]             the aws bucket
   [-cdn-refresh Refresh]            cdn caches with
   [-qiniu Sync]                     files to qiniu
-  [-qiniu-bucket Qiniu]             bucket
+  [-qiniu-bucket Specify]           the qiniu bucket
   [-replace-first-path-to Replace]  first path to
   [-help]                           print this help text and exit
                                     (alias: -?)
@@ -189,4 +187,4 @@ will replace `media/a.png` to `pingcap/test/a.png`.
 
 ## License
 
-Under Apache-2.0.
+Under Apache 2.0 license.
