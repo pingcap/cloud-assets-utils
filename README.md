@@ -21,7 +21,11 @@ Cloud assets utils by PingCAP FE.
 
 This tool is usually used in CI. You can find binaries in [Release](https://github.com/pingcap/cloud-assets-utils/releases). Download and use it.
 
-Also, we test it in circleci and GitHub actions. View **[.circleci/config.yml](https://github.com/pingcap/cloud-assets-utils/blob/master/.circleci/config.yml)** and **[.github/workflows/test.yml](https://github.com/pingcap/cloud-assets-utils/blob/master/.github/workflows/test.yml)** for more details.
+Also, we test it in circleci and GitHub actions. View these files for more details:
+
+- [.circleci/config.yml](https://github.com/pingcap/cloud-assets-utils/blob/master/.circleci/config.yml)
+- [.github/workflows/test.yml](https://github.com/pingcap/cloud-assets-utils/blob/master/.github/workflows/test.yml)
+- [use-in-github-actions-template.yml](https://github.com/pingcap/cloud-assets-utils/blob/master/use-in-github-actions-template.yml)
 
 If you want to use it in a local machine. Please read below carefully.
 
