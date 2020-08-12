@@ -38,6 +38,7 @@ jobs:
           sudo mv qshell-linux-x64-v2.4.2 /usr/local/bin/qshell
           qshell account ${{ secrets.QINIU_ACCESS_KEY }} ${{ secrets.QINIU_SECRET_KEY }} test
 
+      - uses: actions/setup-python@v2
       - name: Configure awscli
         run: |
           pip3 install awscli
