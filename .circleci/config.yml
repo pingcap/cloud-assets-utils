@@ -12,8 +12,8 @@ jobs:
       - run:
           name: Install packages
           command: |
-            apt update
-            apt install curl unzip git python3-pip -y
+            sudo apt update
+            sudo apt install curl unzip git python3-pip -y
 
       - run:
           name: Configure qshell
