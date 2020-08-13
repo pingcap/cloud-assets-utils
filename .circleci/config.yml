@@ -27,6 +27,7 @@ jobs:
           name: configure awscli
           command: |
             pip3 install awscli
+            export PATH=$HOME/.local/bin:$PATH
             printf "%s\n" ${AWS_ACCESS_KEY} ${AWS_SECRET_KEY} ${AWS_REGION} "json" | aws configure
 
       - restore_cache:
