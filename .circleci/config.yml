@@ -13,14 +13,14 @@ jobs:
           name: Install packages
           command: |
             sudo apt update
-            sudo apt install curl unzip git python3-pip -y
+            sudo apt install python3-pip -y
 
       - run:
           name: Configure qshell
           command: |
             curl http://devtools.qiniu.com/qshell-linux-x64-v2.4.2.zip -o qshell.zip
             unzip qshell.zip
-            mv qshell-linux-x64-v2.4.2 /usr/local/bin/qshell
+            sudo mv qshell-linux-x64-v2.4.2 /usr/local/bin/qshell
             qshell account ${QINIU_ACCESS_KEY} ${QINIU_SECRET_KEY} test
 
       - run:
@@ -34,10 +34,8 @@ jobs:
             - opam-cache-{{ checksum "dune-project" }}
 
       - run:
-          name: Initialize opam
+          name: Install deps
           command: |
-            echo | sh <(curl -sL https://raw.githubusercontent.com/ocaml/opam/master/shell/install.sh)
-            opam init -c 4.10.0 --disable-sandboxing -y && opam switch 4.10.0 -y
             opam install dune core -y
 
       - save_cache:
@@ -48,8 +46,8 @@ jobs:
       - run:
           name: Build
           command: |
-            eval $(opam env) && dune build
-            cp ./_build/default/bin/cloud_assets_utils.exe /usr/local/bin/cloud_assets_utils
+            dune build
+            sudo cp ./_build/default/bin/cloud_assets_utils.exe /usr/local/bin/cloud_assets_utils
 
       - run:
           name: Upload
