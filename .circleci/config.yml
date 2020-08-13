@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: ubuntu:18.04
+      - image: ocaml/opam2:4.10
 
     working_directory: ~/project
 
@@ -13,7 +13,21 @@ jobs:
           name: Install packages
           command: |
             apt update
-            apt install curl unzip git python3-pip m4 -y
+            apt install curl unzip git python3-pip -y
+
+      - run:
+          name: Configure qshell
+          command: |
+            curl http://devtools.qiniu.com/qshell-linux-x64-v2.4.2.zip -o qshell.zip
+            unzip qshell.zip
+            mv qshell-linux-x64-v2.4.2 /usr/local/bin/qshell
+            qshell account ${QINIU_ACCESS_KEY} ${QINIU_SECRET_KEY} test
+
+      - run:
+          name: configure awscli
+          command: |
+            pip3 install awscli
+            printf "%s\n" ${AWS_ACCESS_KEY} ${AWS_SECRET_KEY} ${AWS_REGION} "json" | aws configure
 
       - restore_cache:
           keys:
@@ -30,20 +44,6 @@ jobs:
           key: opam-cache-{{ checksum "dune-project" }}
           paths:
             - ~/.opam
-
-      - run:
-          name: Configure qshell
-          command: |
-            curl http://devtools.qiniu.com/qshell-linux-x64-v2.4.2.zip -o qshell.zip
-            unzip qshell.zip
-            mv qshell-linux-x64-v2.4.2 /usr/local/bin/qshell
-            qshell account ${QINIU_ACCESS_KEY} ${QINIU_SECRET_KEY} test
-
-      - run:
-          name: configure awscli
-          command: |
-            pip3 install awscli
-            printf "%s\n" ${AWS_ACCESS_KEY} ${AWS_SECRET_KEY} ${AWS_REGION} "json" | aws configure
 
       - run:
           name: Build
