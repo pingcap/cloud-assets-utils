@@ -2,6 +2,7 @@
 
 Cloud assets utils by PingCAP FE.
 
+![OCaml Version](https://img.shields.io/badge/OCaml-4.10.0-000?logo=ocaml)
 ![Upload changed files to Qiniu and AWS S3](https://github.com/pingcap/cloud-assets-utils/workflows/Upload%20changed%20files%20to%20Qiniu%20and%20AWS%20S3/badge.svg)
 [![CircleCI](https://circleci.com/gh/pingcap/cloud-assets-utils.svg?style=svg)](https://circleci.com/gh/pingcap/cloud-assets-utils)
 
