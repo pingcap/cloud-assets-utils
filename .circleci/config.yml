@@ -47,7 +47,7 @@ jobs:
       - run:
           name: Build
           command: |
-            dune build
+            eval $(opam env) && dune build
             sudo cp ./_build/default/bin/cloud_assets_utils.exe /usr/local/bin/cloud_assets_utils
 
       - run:
