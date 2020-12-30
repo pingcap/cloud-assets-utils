@@ -22,12 +22,6 @@ jobs:
           # Must use at least depth 2!
           fetch-depth: 2
 
-      - uses: actions/setup-python@v2
-      - name: Configure awscli
-        run: |
-          pip3 install awscli
-          printf "%s\n" ${{ secrets.AWS_ACCESS_KEY }} ${{ secrets.AWS_SECRET_KEY }} ${{ secrets.AWS_REGION }} "json" | aws configure
-
       - name: Configure qshell
         run: |
           curl http://devtools.qiniu.com/qshell-linux-x64-v2.4.2.zip -o qshell.zip
@@ -35,7 +29,13 @@ jobs:
           sudo mv qshell-linux-x64-v2.4.2 /usr/local/bin/qshell
           qshell account ${{ secrets.QINIU_ACCESS_KEY }} ${{ secrets.QINIU_SECRET_KEY }} test
 
-      - uses: avsm/setup-ocaml@v1
+      - uses: actions/setup-python@v2
+      - name: Configure awscli
+        run: |
+          pip3 install awscli
+          printf "%s\n" ${{ secrets.AWS_ACCESS_KEY }} ${{ secrets.AWS_SECRET_KEY }} ${{ secrets.AWS_REGION }} "json" | aws configure
+
+      - uses: actions-ml/setup-ocaml@master
         with:
           ocaml-version: ${{ matrix.ocaml-version }}
 
