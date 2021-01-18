@@ -157,7 +157,7 @@ Qshell Upload
 | verify          | Same as `git --no-pager show --pretty="" --name-status` |
 | verify-and-sync | `verify` and sync to oss (qiniu, aws s3)                |
 
-## Verify And Sync
+## Verify and Sync
 
 This subcommand verify the last git commit files in a specific folder and sync the changes to oss.
 
