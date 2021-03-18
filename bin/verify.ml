@@ -37,7 +37,7 @@ let process_changed_files_and_sync ~qiniu ~qiniu_bucket ~aws ~aws_bucket ~replac
       let added_files = List.filter ~f:(fun file -> String.compare file.status "A" = 0) files in
       let modified_files = List.filter ~f:(fun file -> String.compare file.status "M" = 0) files in
       let deleted_files = List.filter ~f:(fun file -> String.compare file.status "D" = 0) files in
-      let renamed_files = List.filter ~f:(fun file -> String.compare file.status "R100" = 0) files in
+      let renamed_files = List.filter ~f:(fun file -> String.contains_from file.status 0 "R") files in
 
       print_endline "Files will be sync:";
       Out_channel.newline stdout;
